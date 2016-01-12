@@ -1,0 +1,171 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2}]}{\end{trivlist}}
+
+\newenvironment{intro}[2][Introduction]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2}]}{\end{trivlist}}
+
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\usepackage{graphicx}
+\graphicspath{{./}}
+
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Homework 1}%replace X with the appropriate number
+\author{Yunzhong He\\ %replace with your name
+204010749} %if necessary, replace with your course title
+ 
+\maketitle
+
+\begin{problem}{1.}
+\item{1.1}
+\begin{align*}
+	F(\nabla_x I) &= \int I(x, y) e^{-i2\pi(x\xi + y\eta)}dy - \int\int I(x,y) \nabla_x e^{-i2\pi(x\xi + y\eta)} dxdy\\
+	&= 2\pi i\xi\int\int I(x, y) e^{-i2\pi(x\xi+y\eta)} dxdy = 2\pi i \xi \hat{I}
+\end{align*}
+Similarly 
+\begin{align*}
+	F(\nabla_y I) = 2\pi i\eta\int\int I(x, y) e^{-i2\pi(x\xi+y\eta)} dxdy = 2\pi i \eta \hat{I}
+\end{align*}\\
+\item{1.2}
+We know that the Fourier transform G is a self-adjoint and unitary linear operator on functions over $\mathbb{R}$, where the inner product is defined as $<f, g> = \int f(t)g(t) dt$. Therefore
+\begin{align*}
+	\int f(t)^2 dt &= <f(t), f(t)> = <f(t), G^*G f(t)> = <Gf(t), Gf(t)> \\
+&= <Gf(t)^*, Gf(t)> = \int G(\xi)^*G(\xi) d\xi
+\end{align*}
+
+\item{1.3} By 1.1 and 1.2 we have
+\begin{align*}
+	H(I) &= \beta\int\int\nabla_xI(x,y)^2 + \nabla_yI(x,y)^2 dxdy \\
+&= \beta\int\int |\nabla I|^2 dxdy = \beta\int\int |F(\nabla I)^2| dxdy = \beta\int\int |F(\nabla_x I)^2 + F(\nabla_y I)^2| dxdy\\
+&= \beta\int\int (2\pi i \xi \hat{I})^2 + (2\pi i \eta \hat{I})^2 dxdy = 4\pi^2\beta\int\int(\xi^2 + \eta^2)|\hat{I}(\xi, \eta)|^2 d\xi d\eta
+\end{align*}
+\\
+
+\item{1.4}
+By 1.3 we know
+\begin{align*}
+	Pr(\xi, \eta) = \frac{1}{Z}exp(-4\pi^2\beta(\xi^2+\eta^2)|\hat{I(\xi, \eta)}|^2)
+\end{align*}
+For a fixed $\xi, \eta$, denote $X = \hat{I}(\xi, \eta)$ with a random variable $X$. Thus from 2.2 we know
+\begin{align*}
+	E[\hat{I}] &= \int x \frac{1}{Z}exp(-4\pi^2\beta(\xi^2+\eta^2)x^2) dx = 0
+\end{align*}
+Note that givin mean is 0, $Pr(x) ~ N(0, \sqrt{8\pi^2\beta(\xi^2+\eta^2)}$. Therefor the variance is 
+$8\pi^2\beta(\xi^2+\eta^2)$.\\
+
+\item{1.5} From 1.4 we know $A(\xi, \eta) \approx E[I^2(\xi, \eta)] = \frac{C}{\xi^2+\eta^2} = C/f$, and $C = 1/8\pi^2\beta$
+
+\item{1.6} Integrating $A^2(f)$ over $f$ we have
+\begin{align*}
+	\int_0^{2\pi}\int_{f}^{2f}A^2(f)fdfd\theta = \int_0^{2\pi}\int_{f}^{2f}C/f^2 f dfd\theta = C(ln2f - lnf) = Cln2
+\end{align*}
+
+\end{problem}
+
+\begin{problem}{2.}
+\item{2.1}
+Assuming that the toy 2D world is scale invariant, then we know the expected number of lines we observed remain constant under different scales. Thus we have
+\begin{align*}
+	\lambda (a, b, A) = \lambda(sa, sb, s^2 A)
+\end{align*}
+Since the center of points follow a uniform distribution, we can assume the probability of a point falling into area A is $Pr(A) = \mu A$, then we have 
+\begin{align*}
+	&\lambda(sa, sb, s^2 A) = \mu s^2 A \cdot Pr(r \in [sa, sb]) = s^2 \mu A \cdot Pr(r \in [sa, sb]) = s^2 \lambda(sa, sb, A)
+\end{align*}
+Therefore
+\begin{align*}
+	\lambda (a,b,A) = s^2 \lambda(sa, sb, A)
+\end{align*}
+In particular
+\begin{align*}
+	\lambda (a,b,A) = 4 \lambda(2a, 2b, A)
+\end{align*}
+\item{2.2}
+Since we have
+\begin{align*}
+	&\lambda (a,b,A) = \mu A \cdot Pr(r \in [a, b]) = \mu A \cdot \int_{a}^b p(r) dr\\
+	&\lambda (sa,sb,A) = \mu A \cdot Pr(r \in [sa, sb]) = \mu A \cdot \int_{sa}^{sb} p(r) dr
+\end{align*}
+By 2.1 we know $\lambda(a, b, A) = s^2 \lambda(sa, sb, A)$, thus
+\begin{align*}
+	\int_{a}^b p(r) d = s^2 \int_{sa}^{sb} p(r) dr
+\end{align*}
+\item{2.3}
+Let $Pr(r) = \int_{a_0}^{r} p(x) dx$, then by 2.2 we have
+\begin{align*}
+	Pr(sr) = \int_{a_0}^{sr} p(x) dx = \int_{sa_0}^{sr} p(x) dx - \int_{a_0}^{sa_0} p(x) dx = \frac{1}{s^2} \int_{a_0}^{r} p(x) dx - C
+\end{align*}
+Take derivatives on both side we have
+\begin{align*}
+	p(sx) s = \frac{1}{s^2} p(x),\ and\  p(r) = s^3p(sr)
+\end{align*}
+Solve in the equation above we know
+\begin{align*}
+	p(r) = \frac{c}{r^3}
+\end{align*}
+\end{problem}
+
+\begin{problem}{3.}
+\item{3.1} Let $L(x, y)$ denote the potential at a single site
+\begin{align*}
+	L(x, y) = (\nabla_xI(x,y))^2 + (\nabla_yI(x,y))^2
+\end{align*}
+By Euler-Lagrangian equation we have
+\begin{align*}
+	-\frac{\partial H(I)}{\partial I} &= -(\frac{\partial L}{\partial I} - \frac{d}{dx}\frac{\partial L}{\partial \nabla_xI} - \frac{d}{dy}\frac{\partial L}{\partial \nabla_yI})\\
+	&= 2\frac{\partial^2 I}{\partial x^2} + 2\frac{\partial^2 I}{\partial y^2} - \frac{\partial^2 I}{\partial x^2} - \frac{\partial^2 I}{\partial y^2} \\
+	&=  \frac{\partial^2 I}{\partial x^2} + \frac{\partial^2 I}{\partial y^2} = \Delta I
+\end{align*}
+Therefore if we want to solve the PDE with gradient descent, we have
+\begin{align*}
+	\frac{\partial I}{\partial t} = \Delta I 
+\end{align*}
+\item{3.2} Discritize H with step size 1 we have
+\begin{align*}
+	&H(I) = \sum_x^{n}\sum_y^{m} (I_y(x,y,t)^2 + I_y(x,y, t)^2) \ where\\
+	&I_x(x, y, t) = I(x+1, y, t) - I(x,y, t)\\
+	&I_y(x, y, t) = I(x, y+1, t) - I(x,y, t)\\
+\end{align*}
+And by 3.1 we have the discretized update rule for gradient descent
+\begin{align*}
+	I(x, y, t+1) = I(x, y, t) +  I_x(x+1, y, t) - I_x(x, y, t) + I_y(x, y+1, t) - I_y(x, y, t)
+\end{align*}
+\item{3.3} When t goes to infinity the image will converge to the lowest energy state, in which all gradients become 0, and it becomes a flat image.
+\end{problem}
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
