@@ -1,0 +1,165 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2}]}{\end{trivlist}}
+
+\newenvironment{intro}[2][Introduction]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2}]}{\end{trivlist}}
+
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\usepackage{graphicx}
+\graphicspath{{./}}
+
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Homework 1}%replace X with the appropriate number
+\author{Yunzhong He\\ %replace with your name
+204010749} %if necessary, replace with your course title
+ 
+\maketitle
+
+\begin{problem}{1.}
+\item{(1)}
+We know
+\begin{align*}
+	Z(\Theta) = \int exp(-\sum_i^K <\lambda_i, H_i(I)>) dI
+\end{align*}
+Thus
+\begin{align*}
+	\frac{\partial logZ}{\partial \lambda_i} = \frac{1}{Z} \frac{\partial Z}{\partial \lambda_i}
+	&= \frac{1}{Z} \int -exp(-\sum_j^K<\lambda_i, H_j(I)>) H_i(I) dI\\
+	&= -\int p(I;\Theta)H_i(I)dI = -E_p[H_i(I)]
+\end{align*}
+\item{(2)}
+\begin{align*}
+	\frac{\partial^2l(\theta)}{\partial\lambda_i\partial\lambda_j} 
+	 = \frac{logp(I;\Theta)}{\partial\lambda_i\partial\lambda_j} 
+	 = \frac{-\partial^2\sum_i^K<\lambda_i, H_i(I)>}{\partial\lambda_i\partial\lambda_j} - \frac{\partial^2logZ}{\partial\lambda_i\partial\lambda_j} 
+	 = -\frac{\partial^2logZ}{\partial\lambda_i\partial\lambda_j}
+\end{align*}
+By 1.1 we know
+\begin{align*}
+	\frac{\partial^2logZ}{\partial\lambda_i\partial\lambda_j}
+	&= -\frac{\partial E_p[H_i(I)]}{\partial\lambda_j}
+	 = -\frac{\partial\int exp(-\sum_k^K <\lambda_k, H_k(I)>)H_i(I) dI / Z}{\partial\lambda_j}\\
+	&= \int \frac{1}{Z} exp(-\sum_k^K <\lambda_k, H_k(I)>) H_i H_j dI \\
+	&-\int \frac{1}{Z} exp(-\sum_k^K <\lambda_k, H_k(I)>) H_i \frac{1}{Z} \int exp(-\sum_k^K <\lambda_k, H_k(I)>) H_j dI dI \\
+	&= -(E_p[H_iH_j] - E_p[H_i h_j]) = -(E_p[H_iH_j] - h_ih_j) = - E_p[(H_i -h_i)(H_j - h_j)]
+\end{align*}
+\item{(3)}
+From 3.2.5 in book we know
+\begin{align*}
+KL(f||p) = entropy(p) - entropy(f)
+\end{align*}
+where f is the true distribution, and f is derived through max entropy principle and estimated through MLE. Thus 
+\begin{align*}
+	KL(f||p) - KL(f||p^+) &= entropy(p) - entropy(f) - entropy(p^+) + entropy(f) \\
+	&= entropy(p) - entropy(p^+) = -(E_{p^+}[logp^+] - E_p[logp])\\
+\end{align*}
+Also according to our constraints
+\begin{align*}
+	E_p[logp] &= -E_p[logZ(\Lambda)] - \sum_i^K <\lambda_i, E_p[<\lambda_i, H_i(I)]>\\
+	&= -logZ(\Lambda) - \sum_i^K <\lambda_i, E_f[<\lambda_i, H_i(I)]>\\
+	&= -E_{p^+}[logZ(\Lambda)] - \sum_i^K <\lambda_i, E_{p^+}[<\lambda_i, H_i(I)]>\\
+	&= E_{p^+}[logp]
+\end{align*}
+Therefore
+\begin{align*}
+	KL(f||p) - KL(f|p^+) &= -(E_{p^+}[logp^+] - E_p[logp]) = -(E_{p^+}[logp^+] - E_{p^+}[logp]) \\
+	&= \int p^+(I) log\frac{p^+(I)}{p(I)} \\
+	&= KL(p^+||p)
+\end{align*}
+\end{problem}
+
+\begin{problem}{2.}
+\item{(1)}
+Let
+\begin{align*}
+	L = \int p(I)log\frac{p(I)}{q(I)} dI + \sum_i^K \lambda_i (E_p[H_i] - \mu_i^{obs}) + \lambda_0 (\int p(I) dI - 1)
+\end{align*}
+Solving $\frac{\partial L}{\partial p} = 0$ we get
+\begin{align*}
+	logp + 1 - logq + \sum_i^K \lambda_i H_i + \lambda_0 = 0
+\end{align*}
+Hence
+\begin{align*}
+	p(I) = \frac{1}{Z} exp(-\sum_i^K\lambda_iH_i) q(I)
+\end{align*}
+\item{(2)}
+Plug in result from 2.1 we know
+\begin{align*}
+	&KL(f||q) - KL(f||p) = E_f[logf] - E_f[logq] - E_f[logf] + E_f[logq] = E_f[logp] - E_f[logq]\\
+&= E_f[-\sum_i^K \lambda_iH_i] + E_f[logq] - E_f[Z] - E_f[logq] = E_f[-\sum_i^K \lambda_iH_i] - E_f[Z]\\
+&= -\sum_i^K\lambda_iE_f[H_i] - Z
+\end{align*}
+According to our constraints on sufficient statics, we have
+\begin{align*}
+	&KL(f||q) - KL(f||p) = -\sum_i^K\lambda_iE_f[H_i] - Z = -\sum_i^K\lambda_iE_p[H_i] - E_p[Z]
+\end{align*}
+Expanding $KL(p||q)$ we have
+\begin{align*}
+	KL(p||q) = E_p[logp] - E_p[logq] &= -\sum_i^K\lambda_iE_p[H_i] + E_p[logq] - E_p[Z] - E_p[logq]\\
+&= -\sum_i^K\lambda_iE_p[H_i] - E_p[Z] \\
+&= KL(f||q) - KL(f||p)
+\end{align*}
+\item{(3)}
+Suppose $p(I)$ is a uniform distribution such that $p(I) = C$, thus
+\begin{align*}
+	p(I) = \frac{C}{Z} exp(-\sum_i^K\lambda_iH_i) = \frac{1}{Z'} exp(-\sum_i^K\lambda_iH_i)
+\end{align*}
+which is precisely the result from max entropy principle. Thus minimizing Kullback-Leiber divergence with a uniform distribution is equivalent to maximizing the entropy of our model in this case.
+\end{problem}
+
+\begin{problem}{3.}
+\item{(1)}
+\begin{align*}
+	&|\Omega(0.2)| = {{N}\choose{0.2N}} = \frac{N!}{(0.2N)!\cdot(0.8N)!}\\
+	&|\Omega(0.5)| = {{N}\choose{0.5N}} = \frac{N!}{(0.5N)!\cdot(0.5N)!}
+\end{align*}
+\item{(2)}
+\begin{align*}
+	p(S_N \in \Omega(q)) = |\Omega(q)| \cdot p^{Nq} (1-p)^{1-Nq} = 
+	\frac{N!}{(Nq)!(1-Nq)!} \cdot p^{Nq} (1-p)^{1-Nq}
+\end{align*}
+\item{(3)}
+Since $q = \frac{1}{N}\sum_i^N x_i$ where $x_i$ are Bernoulli random variables with $\mu = p$ and $\sigma^2 = p(1-p)$, by CLT we know 
+\begin{align*}
+	\lim_{N\to\infty} p(S_N \in \Omega(q)) = N(p, \frac{p(1-p)}{N}) = N(p, 0)
+\end{align*}
+Therefore $P(S_N \in \Omega(p)) = 1$ and $P(S_N \in \Omega(q)) = 0$ if $q \neq p$.
+\end{problem}
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
