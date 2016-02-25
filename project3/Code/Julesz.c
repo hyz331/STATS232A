@@ -3,9 +3,9 @@
 #include <time.h>
 #include <stdint.h>
 
-#define MAX_INTENSITY 255 //Max intensity of the image. 255 is too large for experiments. 15 will be much faster.
-#define im_width 468 //width of image.
-#define im_height 468 //height of image.
+#define MAX_INTENSITY 7 //Max intensity of the image. 255 is too large for experiments. 15 will be much faster.
+#define im_width 256 //width of image.
+#define im_height 256 //height of image.
 
 
 void getHistogram(const double *filter, const int width, const int height, const int *image, int *response, const int num_bins, double *filtered)
