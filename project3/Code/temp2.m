@@ -7,7 +7,7 @@ pic = int32(double(pic) ./ 255 .* 7);
 width = int32(width);
 height = int32(height);
 weights = [8, 7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7, 8];
-num_filters = 17;
+num_filters = 40;
 
 % Generate uniform image
 I = int32(rand(256, 256) * 7);
@@ -15,8 +15,10 @@ I = int32(rand(256, 256) * 7);
 % Filter selection
 selected = [];
 unselected = 1:num_filters;
+syn_error = zeros(1, num_filters);
 
-for i = 1:10
+num_plot = 1;
+for iter = 1:20
 	errors = zeros(1, length(unselected));
 	for i = 1:length(unselected)
 		idx = unselected(i);
@@ -30,17 +32,17 @@ for i = 1:10
 	unselected = unselected(unselected ~= best_idx);
 	
 	hist = getHistogram(pic, filters(selected, :)', width(selected), height(selected));
-	[synthesized, hist] = Julesz(reshape(hist', 15, length(selected)), filters(selected, :)', width(selected), height(selected));
+	[I, hist] = Julesz(reshape(hist', 15, length(selected)), filters(selected, :)', width(selected), height(selected));
+	syn_error(iter) = norm(double(I-pic));
 
-	imshow(synthesized, []);
-	pause
+	if (iter == 3 || iter == 8 || iter == 10 || iter == 15 || iter == 20)
+		subplot(2, 2, num_plot)
+		num_plot = num_plot + 1;
+		imshow(I, []);
+		plot(1:iter, syn_error(1:iter));
+	end	
+
 end
 
-% Generate random image as iniital image
-%num_filters = 1;
-%histo5 = getHistogram(pic, filters(1:num_filters, :)', width(1:num_filters), height(1:num_filters));
-%[synthesized5, histo5a] = Julesz(reshape(histo5', 15, num_filters), filters(1:num_filters, :)', width(1:num_filters), height(1:num_filters));
-
-
-%imshow(synthesized5, []);
-%imwrite(uint8(synthesized5), 'syn5.bmp', 'bmp');
+figure;
+plot(1:iter, syn_error(1:iter));
