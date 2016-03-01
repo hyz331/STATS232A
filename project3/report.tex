@@ -71,6 +71,27 @@ Before learning our model, we resized all images to 256x256 with 0~7 grayscale i
 \item{III.2 Weighted histograms and filter selection\\}
 Since it is more effective for histograms to match at head and tail, we assiged the weights \[8, 7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7, 8\] to our 15 bins. And we use the weights compute weighted difference between histograms. At each iteration, we pick the filter that yields the largest weighted histogram difference the input image and the synthesized result from the previous iteration. To pick an initial value for synthesized image, we simply generated a white noise image.
 \end{problem}
+
+\begin{problem}{IV Results}
+\item{}
+The following synthesized images and their corresponding L-1 error curves are achieved.
+\item{IV.1 Fur}
+\begin{center}
+	\includegraphics[width=14cm]{Code/Results/fur.png}
+	\includegraphics[width=10cm]{Code/Results/fur_error.png}
+\end{center}
+\item{IV.2 Grass}
+\begin{center}
+	\includegraphics[width=14cm]{Code/Results/grass.png}
+	\includegraphics[width=10cm]{Code/Results/grass_error.png}
+\end{center}
+\item{Iv.3 Stucco}
+\begin{center}
+	\includegraphics[width=14cm]{Code/Results/stucco.png}
+	\includegraphics[width=10cm]{Code/Results/stucco_error.png}
+\end{center}
+\end{problem}
+% --------------------------------------------------------------
 % --------------------------------------------------------------
 %     You don't have to mess with anything below this line.
 % --------------------------------------------------------------
