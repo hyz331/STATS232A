@@ -6,12 +6,24 @@ count = count + 1;
 F{count} = [-1, 1];
 count = count + 1;
 F{count} = [-1; 1];
+count = count + 1;
+F{count} = [1 1;-1 -1];
+count = count + 1;
+F{count} = [-1 -1;1 1];
+count = count + 1;
+F{count} = [1 0;0 -1];
+count = count + 1;
+F{count} = [-1 0;0 1];
+count = count + 1;
+F{count} = [0 1;-1 0];
+count = count + 1;
+F{count} = [0 -1;1 0];
 
 for count = 3:5
     F{count} = fspecial('log', (count-2)*2+1, (count-2)/3);
 end
 
-for i = 7
+for i = [5, 7, 9, 15]
     for j = 0:30:150
         [a, b] = gaborfilter(i, j);
         count = count + 1;
