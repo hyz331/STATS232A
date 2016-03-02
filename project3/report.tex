@@ -43,7 +43,7 @@
 %                         Start here
 % --------------------------------------------------------------
  
-\title{Project 2: Texture Modeling and Synthesis}%replace X with the appropriate number
+\title{Project 3: Texture Modeling and Synthesis}%replace X with the appropriate number
 \author{Yunzhong He\\ %replace with your name
 204010749} %if necessary, replace with your course title
  
@@ -67,7 +67,7 @@ For this project we used 6 gradient filters of different directions, Gabor filte
 
 \begin{problem}{III Methods}
 \item{III.1 Image pre-processing\\}
-Before learning our model, we resized all images to 256x256 with 0~7 grayscale intensity to speed up our computations.
+Before learning our model, we resized all images to 256x256 with 0-7 grayscale intensity to speed up our computations.
 \item{III.2 Weighted histograms and filter selection\\}
 Since it is more effective for histograms to match at head and tail, we assiged the weights \[8, 7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7, 8\] to our 15 bins. And we use the weights compute weighted difference between histograms. At each iteration, we pick the filter that yields the largest weighted histogram difference the input image and the synthesized result from the previous iteration. To pick an initial value for synthesized image, we simply generated a white noise image.
 \end{problem}
@@ -90,7 +90,7 @@ The following synthesized images and their corresponding L-1 error curves are ac
 	\includegraphics[width=14cm]{Code/Results/stucco.png}
 	\includegraphics[width=10cm]{Code/Results/stucco_error.png}
 \end{center}
-\item{IV.4 Some selected filters}
+\item{IV.4 Some selected filters}\\
 Below are some popular filters being selected.
 \begin{center}
 	\includegraphics[width=3cm]{Code/Results/selected_filter_1.png}
