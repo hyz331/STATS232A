@@ -1,0 +1,6 @@
+experiment_learn_frame('bark')
+experiment_learn_frame('beehive')
+experiment_learn_frame('coffee')
+experiment_learn_frame('rose')
+experiment_learn_frame('stucco')
+experiment_learn_frame('water')
