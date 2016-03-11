@@ -1,0 +1,5 @@
+run_batch_helper('beehive')
+run_batch_helper('rose')
+run_batch_helper('stucco')
+run_batch_helper('bark')
+run_batch_helper('coffee')

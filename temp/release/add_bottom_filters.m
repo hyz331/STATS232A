@@ -16,8 +16,8 @@ if ismember(1, layer)
     %% layer 1
     layer_name = '1';
     num_in = 3;
-    num_out = 64 % 20; % number of filters in the first layer
-    filter_sz = 30; % the square filter with filter size 15x15 in the 1st layer
+    num_out = 100; % number of filters in the first layer
+    filter_sz = 15; %15; % the square filter with filter size 15x15 in the 1st layer
     stride = 1; % sub-sampling size for each filter, 1 means in spatial space, each filter is put every two pixels. 
     pad_sz = 2; % pad size for image. For example, image is 224x224, and we add two pixels (padded image is 228x228) to handle boundary conditions.
     pad = ones(1,4)*pad_sz;
@@ -27,9 +27,9 @@ end
 if ismember(2, layer)
     %% layer2
     layer_name = '2';
-    num_in = 32;
-    num_out = 20 %; % 64 40
-    filter_sz = 20 %10;% 5; %7 size: 34, 5
+    num_in = 100;
+    num_out = 64; % 64 40
+    filter_sz = 10; %7 size: 34, 5
     stride = 1;%2 , 1
     pad_sz = 2;%ceil(filter_sz/2);
     pad = ones(1,4)*pad_sz;
@@ -37,14 +37,13 @@ if ismember(2, layer)
 end
 
 if ismember(3, layer)
-    %% layer2
+    %% layer3
     layer_name = '3';
-    num_in = 15;
-    num_out = 10; %; % 64 40
-    filter_sz = 20 %10;% 5; %7 size: 34, 5
+    num_in = 64;
+    num_out = 32; % 64 40
+    filter_sz = 3; %7 size: 34, 5
     stride = 1;%2 , 1
-    pad_sz = 2;%ceil(filter_sz/2);
+    pad_sz = ceil(filter_sz/2);
     pad = ones(1,4)*pad_sz;
     net = add_cnn_block(net, opts, layer_name, filter_sz, filter_sz, num_in, num_out, stride, pad) ;
 end
-

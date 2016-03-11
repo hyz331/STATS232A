@@ -1,6 +1,8 @@
+function [] = experiment_learn_frame(category)
+
 close all;
 learningTime = tic;
-[config, net] = frame_config('rose');
+[config, net] = frame_config(category);
 
 for layer = 1:1:config.layer_to_learn
     

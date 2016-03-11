@@ -2,7 +2,7 @@ function [] = experiment_learn_frame()
 
 close all;
 learningTime = tic;
-[config, net] = frame_config('beehive');
+[config, net] = frame_config('water');
 
 for layer = 1:1:config.layer_to_learn
     

@@ -6,7 +6,7 @@ end
 %% GPU setting
 % if use gpu, set config.gpus = [1];
 % if use cpu, set config.gpus = [];
-config.gpus = [];
+config.gpus = [1];
 
 
 %% parameters for sampling
@@ -29,7 +29,7 @@ config.Delta = 0.3;
 config.layer_to_learn = 3;
 
 % learning iterations for each layer
-config.nIteration = 2;
+config.nIteration = 700;
 % learning rate
 config.Gamma = 0.0008;
 % batch size, no need to change
@@ -41,7 +41,7 @@ config.BatchSize = 32;
 config.categoryName = category;
 
 % image path: where the dataset locates
-config.inPath = ['../Image/', config.categoryName '/'];
+config.inPath = ['../image/', config.categoryName '/'];
 
 % 3rd party path: where the matconvnn locates
 config.matconvv_path = '../matconvnet-1.0-beta16/';

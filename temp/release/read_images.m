@@ -11,7 +11,7 @@ if isempty(files)
 end
 
 if isempty(files)
-    fprintf('error: No training images are found\n');
+    fprintf('error: No training images are found!!\n');
     keyboard;
 end
 
